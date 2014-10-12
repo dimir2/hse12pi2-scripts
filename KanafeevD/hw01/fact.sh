@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script fact V.0.1
 
- pCounter="$1"
+ pCounter=0
 pFact=1
 
 if [ "$1" -lt  0 ] ; then
@@ -14,7 +14,7 @@ if [ "$1" -lt  0 ] ; then
 	exit 1
 fi
 
-while  [ "$pCounter"  -ne 1 ] ; do
+while  [ "$1" -gt "$pCounter"  ] ; do
 	pFact=$(($pCounter * $pFact))
 	pCounter=$(($pCounter - 1))
 done
