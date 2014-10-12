@@ -7,33 +7,33 @@ m=0
 n=2
 if [[ $1 = "1" || $1 = "2" ]]
 	then	
-	echo "1";
+	echo "1"
 else
-	let "l=$1+1";
+	let "l=$1+1"
 	while [[ $n != $l ]]
 		do
-			let "g=m+k";
-			let "m=k";
+			let "g=m+k"
+			let "m=k"
 			let "k=g"
-			let "n+=1";
+			let "n+=1"
 		done	
-	echo "fibonnacce $1 = $g";
+	echo "fibonnacce $1 = $g"
 fi
 }
 
 function fact {
-x=1;
+x=1
 b="$1"
 	if [[ $b = "1" ]]
 		then
-		echo "1";
+		echo "1"
 	else 	
 		while [[ $b != "1" ]]
 		do
-			let "x=$b*$x";
-			let "b-=1";
+			let "x=$b*$x"
+			let "b-=1"
 		done	
-	echo "factorial $1 = $x";
+	echo "factorial $1 = $x"
 fi
 }
 case $1 in
