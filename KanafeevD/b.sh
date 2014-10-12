@@ -9,14 +9,8 @@ pNum=0
 pScriptFibo="./hw01/fibo.sh"
 pScriptFact="./hw01/fact.sh"
 
-# check param num
-if [ $# -ne 4 ] ; then
-	echo "# Usage -s <> -n <>"
-	exit
-fi
-
 # read param
-while getopts s:n optname > /dev/null 2>&1; do
+while getopts s:n:q optname > /dev/null 2>&1; do
 	case  "$optname" in
 		s)
         		pFunc="$OPTARG"
@@ -32,21 +26,29 @@ while getopts s:n optname > /dev/null 2>&1; do
 done
 shift `expr $OPTIND - 1`
 
+
+# check param num
+if [ $# -ne 4 ] & [ -z "$pNum" ] & [ -z "$pFunc" ] ; then
+	echo "# Usage -s <> -n <>"
+	exit 0
+fi
+
+
 # start script
 case $pFunc in 
 	fibo)
 		echo "Start fibo..."
-		sh $pScriptFibo
-		exit
+		$pScriptFibo $pNum
+		exit 0
 		;;
 	fact)
 		echo "Start fact..."
-		sh $pScriptFact
-		exit
+		$pScriptFact "$pNum"
+		exit 0
 		;;
 	*)
 		echo "Not found!"
-		exit
+		exit 1
 		;;
 esac
 
