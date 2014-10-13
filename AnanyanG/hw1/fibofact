@@ -2,29 +2,30 @@
 
 function fibo_iter
 {
-	m = 1
-	n = 1
-	fib = 2
-	i = 2
-	wwhile [$i -lt $1]
+	m=1
+	n=1
+	fib=2
+	i=2
+	while [ $i -lt $1 ]
 	do
-		fib = $[$m + $n]
-		m = $n
-		i = $[$i +1]
+		fib=$[$m+$n]
+		m=$n
+		n=$fib
+		i=$[$i+1]
 	done
 	echo $fib
 }
 
 function factorial_iter
 {
-	num = 1
+	num=1
 
 	for i in `seq 1 $1`
 	do
-		num = $[$num * $i]
+		num=$[$num * $i]
 	done
 
-	echo $sum
+	echo $num
 }
 
 echo "fibo_iter $1: $(fibo_iter $1)"
