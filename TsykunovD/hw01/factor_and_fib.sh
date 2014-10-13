@@ -14,7 +14,7 @@ function fibonachi {
   if [ $count -eq 0 -o $count -eq 1 ]
   then
     echo "Число фибоначи от $count = $fib1"
-    return 0
+    return 1
   fi
   fibsum=0
   while [ $i -lt $count ]
@@ -30,15 +30,23 @@ function fibonachi {
 function factorial {
   if [ $1 -lt 0 ]
   then
-    return 1
+    echo "неправильно ввели значение"
   fi
   if [ $1 -eq 0 ]
   then
-    return 1
+    echo "Факториал от $1=1"
   else
-    factorial $[$1-1]
-    return $[$1*$?]
+    i=1
+    b=1
+    facsum=1
+    while [ $i -lt $[$1+1] ]
+    do
+      b=$facsum
+      facsum=$[$b*$i]
+      i=$[$i+1]
+    done
   fi
+  echo "Факториал от $1 = $facsum"
 }
 
 function main {
@@ -52,7 +60,6 @@ function main {
   fi
   echo "Вы ввели $countfact"
   factorial $countfact
-  echo "Факториал от числа $countfact = $?"
 }
 
 
