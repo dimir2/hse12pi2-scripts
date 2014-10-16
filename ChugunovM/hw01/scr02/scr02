@@ -1,0 +1,19 @@
+#!/bin/bash
+
+source fibofact.lib
+
+function main
+{
+	if (( $# == 1 ))
+		then if [ $1 -ge 0 ]
+			then echo "fibo_iter $1: $(fibo_iter $1)"
+			echo "factorial_iter $1: $(factorial_iter $1)"	
+			return 0
+			fi
+	fi
+	echo "Вводимый параметр должен быть числом и большим нуля!"
+	return 1
+}
+
+main $1
+
