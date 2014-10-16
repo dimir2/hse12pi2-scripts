@@ -18,7 +18,7 @@ function usage ()
 	echo "#--------------|---------------------|------------------------------------------"
 	echo "# fibo         | calc fibonacci      | integer, must be possitive or zero"
 	echo "# fact         | calc factorial      | integer, must be possitive or zero"
-	echo "# fibo         | check is num prime  | integer				"
+	echo "# pnum         | check is num prime  | integer				"
 	echo "#-------------------------------------------------------------------------------"
 	echo "#"
 	echo "# Scripts for string ( -c ):"
