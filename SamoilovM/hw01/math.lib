@@ -1,0 +1,98 @@
+l=1 #final fibonacci number
+j=1 #previous fibonacci number
+k=0 #pre-previous fibonacci number
+
+function fib {
+
+	if [ -z "${1//[^0-9]/}" ]
+	then
+		echo "Incorrect input! Integer expected"
+		exit 1
+	else
+		if [ $1 -eq 0 ] #the 0 fibonacci number
+		then
+			l=$k
+		elif [ $1 -eq 1 ] #the 1 fibonacci number
+		then
+			l=$j
+		elif [ $1 -lt 0 ]
+		then
+			echo "Incorrect input! $1 is not natural number"
+			exit 2
+		else
+			for i in `seq 2 $1`
+			do 
+				l=`expr $j + $k`
+				k=$j		
+				j=$l
+			done
+		fi
+
+		echo "fib($1) = $l" 
+	fi
+}
+
+m=1 #factorial number
+
+function fac {
+
+	if [ -z "${1//[^0-9]/}" ]
+	then
+		echo "Incorrect input! Integer expected"
+		exit 3
+	else
+		if [ $1 -lt 0 ]
+		then
+			echo "Incorrect input! $1 is not natural number"
+			exit 4
+		else
+			for i in `seq 1 $1`
+			do 
+				m=`expr $m \* $i`
+			done
+			echo "fac($1) = $m"
+		fi
+	fi
+}
+
+flag=0 #magic flag
+
+function isPrime {
+
+	if [ -z "${1//[^0-9]/}" ]
+	then
+		echo "Incorrect input! Integer expected"
+		exit 5
+	else
+
+		if [ $1 -eq 0 ] || [ $1 -eq 1 ]
+		then
+			flag=2 #neither composite nor the prime
+		elif [ $1 -lt 0 ]
+		then
+			echo "Incorrect input! $1 is not natural number"
+			exit 6
+		else		
+			a=`expr $1 - 1`
+			for i in `seq 2 $a` #attempt to divide on all numbers from 2 to $1-1
+				do
+				if (( $1%i == 0 )) #if mod equals 0, then number is prime
+				then 
+					flag=1 #composite number
+					break
+				fi
+			done
+		fi
+
+		if [ $flag -eq 1 ]
+		then
+			echo "$1 is composite number"
+		elif [ $flag -eq 2 ]
+		then
+			echo "$1 is neither composite nor the prime"
+		else
+			echo "$1 is prime number"
+		fi
+	fi
+}
+
