@@ -1,0 +1,45 @@
+#!/bin/bash
+
+function fibo_iter
+{
+	if [ $1 -le 0 ]
+		then echo 0
+	elif [ $1 -eq 1 ]
+		then echo 1
+	else
+	a=1
+	b=1
+	fib=2
+	i=2
+	while [ $i -lt $1 ]
+	do
+		fib=$[$a+$b]
+		a=$b
+		b=$fib
+		i=$[$i+1]
+	done
+	echo $fib
+	fi
+}
+
+function factorial_iter
+{
+	if [ $1 -lt 2 ]
+	then
+		echo 1
+	else
+	num=1
+
+	for i in `seq 1 $1`
+	do
+		num=$[$num * $i]
+	done
+
+	echo $num
+	fi
+}
+
+#echo "fibo_iter $1: $(fibo_iter $1)"
+
+#echo "factorial_iter $1: $(factorial_iter $1)"
+

@@ -11,8 +11,12 @@ function pnum()
 	noColor='\e[0m' 
 
 	i=2
- 
-	if [ "$1" -eq 2 ] ; 
+
+	if [ "$1" -lt 2 ] ; 
+	then 
+		echo -e "${red}$1 is not primary number!${noColor}"
+		return 1
+	elif [ "$1" -eq 2 ] ; 
 	then 
 		echo -e "${green}$1 is primary number!${noColor}"
 		return 0
