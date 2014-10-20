@@ -41,7 +41,7 @@ function isPrime() {
 	declare -i i=3
 	declare -i bound=$1/2
 	while [ $i -lt $bound ]; do
-		if [ $(($1 % $i)) -eq 0 ]; then
+		if [ `expr $1 % $i` -eq 0 ]; then
 			echo 0
 			return
 		fi

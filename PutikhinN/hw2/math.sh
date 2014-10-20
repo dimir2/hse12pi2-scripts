@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/bin/bash -x
 
 source mathlib.sh
 
 function validatePositiveInteger() {
-	if [[ $1 =~ ^0*[1-9][0-9]*$ ]]; then
+	RE='^0*[1-9][0-9]*$'
+	if [[ $1 =~ $RE ]]; then
 		return 0
 	else
 		echo "Error: expected positive integer"
@@ -12,7 +13,8 @@ function validatePositiveInteger() {
 }
 
 function validateNonnegativeInteger() {
-	if [[ $1 =~ ^([0-9]+|-0*)$ ]]; then
+	RE='^([0-9]+|-0*)$'
+	if [[ $1 =~ $RE ]]; then
 		return 0
 	else
 		echo "Error: expected nonnegative integer"
