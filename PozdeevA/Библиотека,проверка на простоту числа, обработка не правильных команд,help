@@ -1,0 +1,59 @@
+#!/bin/bash
+
+source math.lib
+b=1
+func=$1
+param=$2
+fact=fact
+fib=fib
+prime=prime
+function help {
+	echo "command fib - fibonace, write 'fib param', param- parametr is number"
+	echo "command fact - factorial, write 'fact param', param- parametr is number"
+	echo "prime - is number prime?, write 'prime param', param- parametr is number"
+	echo "help, write 'help', help is help :))"	
+}
+if [[ $func = "help" ]]
+then	
+	help
+fi
+while [[ $nb != "0" ]]
+do
+	if [[ $func = $fib || $func = $fact || $func = $prime ]]
+	then
+		
+		if [[ $param = "0" || $param < "0" ]]
+		then
+			echo "you dont use this as parametr"
+			echo "write a parametr;Example: 3"
+			read param
+		else
+			let "ut=$param+0" 2>/dev/null
+			if [[ $ut = "0" ]]
+			then
+				echo "you dont use this parametr"
+				echo "write a parametr;Example: 3"
+				read param
+			else
+				if [[ ( $func = $fib && "$param" -lt "5663" ) || ( $func = $fact && "$param" -lt "26" ) || ( $func = $prime) ]] 2>/dev/null
+				then	
+					let "nb=0"
+					case $func in
+ 					fib) fib $param;;
+					fact) fact $param;;
+					prime) prime $param;;
+					*) err;;
+					esac
+				else
+					echo "you dont use this parametr"
+					echo "write a parametr(parametr must be for fib from 1 to 5662, and for fact from 1 to 25);Example: 3"
+					read param
+				fi
+			fi
+		fi
+	else
+		echo "write name of func(fib, fact, prime) and parametr;Example: fib 3"
+		read func param
+	
+	fi
+done
