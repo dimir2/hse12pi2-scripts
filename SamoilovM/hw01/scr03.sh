@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source fr+sorts.lib
+source lib03.lib
 
 function help {
 	echo "--fib_rec and number for recursive Fibonacci"
