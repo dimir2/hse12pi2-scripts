@@ -1,0 +1,123 @@
+function fib_rec #recursive Fibonacci
+{
+	if [ -z "${1//[0-9]/}" ]
+	then
+		if [ -z "$1" ] 
+		then
+			echo "Incorrect input! Integer expected"
+			exit 1
+		elif (( $1 == 1 || $1 == 2 ))
+		then
+			echo 1
+		else
+			echo $[ $(fib_rec $[ $1 - 1 ]) + $(fib_rec $[ $1 - 2 ]) ]
+		fi
+	else
+		echo "Incorrect input! Integer expected"
+		exit 2
+	fi
+}
+
+function qSort #quick sort
+{
+	for i in `seq 2 $dig` #magic, because an array
+	do
+		shift
+	done
+
+    	i=$2
+    	j=$3
+	e=$[ ($2+$3) / 2 ]
+    	x=${arr[e]}
+    	while (( i <= j ))
+	do
+    		while (( ${arr[i]} < x ))
+		do
+			(( ++i ))
+		done
+    		while (( ${arr[j]} > x )) 
+		do
+			(( --j ))
+		done
+    		if (( i <= j ))
+		then
+    			temp=${arr[i]}
+    		    	arr[i]=${arr[j]}
+    		    	arr[j]=$temp
+    		    	(( i++ ))
+ 			(( j-- ))
+		fi
+	done
+    
+    	if (( $2 < j ))
+	then
+		qSort ${arr[*]} $2 $j
+	fi
+    	if (( i < $3 ))
+	then
+		qSort ${arr[*]} $i $3
+	fi
+}
+
+function bSort
+{
+	for i in `seq 2 $dig` #the magic continues
+	do
+		shift
+	done
+
+	let jey=$2-1
+	for i in `seq 0 $2`
+	do
+	    	flag=0
+	       	for j in `seq 0 $jey`
+		do
+	       		if (( arr[j] > arr[j+1] ))
+			then
+	       			temp=${arr[j]}
+	       			arr[j]=${arr[j+1]}
+	       			arr[j+1]=$temp
+	       			flag=1
+	       		fi
+	       	done
+	       	if (( flag!=1 ))
+		then
+	       		break
+		fi
+	done
+}
+
+function sort
+{	
+	if [ -e $1 ]
+	then	
+	
+	i=0
+	while read line
+	do
+		if [ -z "${line//[0-9]/}" ] #for numbers only in array
+		then
+			arr[i]=$line
+			(( i++ ))
+		else
+			echo "Only numbers must be in file!"
+			exit 3
+		fi
+	done <$1
+
+	echo "Input array: ${arr[*]}"
+
+	min=0
+	let max=${#arr[@]}-1
+	dig=${#arr[@]}
+
+	case "$2" in
+		"b") bSort ${arr[*]} $max;;
+		"q") qSort ${arr[*]} $min $max;;
+	esac	
+
+	echo "Sorted array: ${arr[*]}"
+	else
+		echo "file for sort expected!"
+	fi
+}
