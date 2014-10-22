@@ -1,22 +1,62 @@
 #!/bin/bash
-# Script starter V.0.1
+# Script starter V.0.3
+# TODO:
+# 1. Check param on string -DONE!
+# 2. Lib - DONE!
+# 3. Usage - DONE!
+# 4. Simple num
+
+
+function usage ()
+{
+	echo "#"
+	echo "# Usage -s <script_name> -n <integer_num> -c <string>"
+	echo "#"
+	echo "# Scripts for integer number ( -n ):"
+	echo "#--------------|---------------------|------------------------------------------"
+	echo "# Script name  | Action              |-n Param								"
+	echo "#--------------|---------------------|------------------------------------------"
+	echo "# fibo         | calc fibonacci      | integer, must be possitive or zero"
+	echo "# fact         | calc factorial      | integer, must be possitive or zero"
+	echo "# pnum         | check is num prime  | integer				"
+	echo "#-------------------------------------------------------------------------------"
+	echo "#"
+	echo "# Scripts for string ( -c ):"
+	echo "#--------------|---------------------|------------------------------------------"
+	echo "# Script name  | Action              |-c Param								"
+	echo "#--------------|---------------------|------------------------------------------"
+	echo "# ****************************There are no scripts!*****************************"
+	echo "#-------------------------------------------------------------------------------"
+	echo "#"
+	return
+}
 
 #params
 pFunc=0
 pNum=0
+pString=""
 
-#path to script
-pScriptFibo="./hw01/fibo.sh"
-pScriptFact="./hw01/fact.sh"
+# check param num
+if [ $# -ne 4 ] ; then
+	usage
+	exit 0
+fi
 
 # read param
-while getopts s:n:q optname > /dev/null 2>&1; do
+while getopts s:n:h optname > /dev/null 2>&1; do
 	case  "$optname" in
 		s)
         		pFunc="$OPTARG"
 			;;
 		n)
         		pNum="$OPTARG"
+			;;
+		c)
+        		pString="$OPTARG"
+			;;
+		h)
+			usage
+			exit 0        			
 			;;
 		*)
        			echo Unknown option 1>&2
@@ -26,28 +66,35 @@ while getopts s:n:q optname > /dev/null 2>&1; do
 done
 shift `expr $OPTIND - 1`
 
-
-# check param num
-if [ $# -ne 4 ] & [ -z "$pNum" ] & [ -z "$pFunc" ] ; then
-	echo "# Usage -s <> -n <>"
-	exit 0
+#check param int/string
+if [ "$pNum" -eq "$pNum" ] 2>/dev/null
+then :
+#    echo "$pNum is an integer !!"
+else
+    echo "ERROR: -n parameter must be an integer."
+    usage
+    exit 1
 fi
-
 
 # start script
 case $pFunc in 
 	fibo)
-		echo "Start fibo..."
-		$pScriptFibo $pNum
+		source hw01/fibo.sh
+          	fibo $pNum
 		exit 0
 		;;
 	fact)
-		echo "Start fact..."
-		$pScriptFact "$pNum"
+		source hw01/fact.sh
+		fact $pNum 
+		exit 0
+		;;
+	pnum)
+		source hw02/pnum.sh
+		pnum $pNum 
 		exit 0
 		;;
 	*)
-		echo "Not found!"
+		echo "Script is not found! Pls, read help:  b.sh -h "
 		exit 1
 		;;
 esac
