@@ -12,25 +12,28 @@ function getFib() {
 	echo $((`getFib $(($1-1))` + `getFib $(($1-2))`)) 
 }
 
-declare -a arr; arr=(0 0)
+
+declare -a arr; arr=(0 1 1)
 function getFibD() {
+	_getFibD $1
+	echo ${arr[$1]}
+}
+
+function _getFibD() {
 	declare -i arg=$1
 	if [ $arg -le 0 ]; then
-		echo 0
 		return
 	fi
 	if [ $arg -le 2 ]; then
-		echo 1
 		return
 	fi
 	test=${arr[@]}
-	if [[ ${arr[$arg]} -gt 0 ]]; then
-		echo ${arr[$arg]}
+	if [[ -n ${arr[$arg]} ]]; then
 		return
 	fi
-	arr[$1]=$((`getFibD $(($arg-1))` + `getFibD $(($arg-2))`))
+	_getFibD $((arg-1))
+	arr[$1]=$((arr[arg-1]+arr[arg-2]))
 	test=${arr[@]}
-	echo ${arr[$arg]} 
 }
 
 function getFac() {
