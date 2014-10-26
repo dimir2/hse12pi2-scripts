@@ -1,0 +1,49 @@
+#!/bin/bash
+
+function fib 
+{
+
+	a=1
+	b=1
+	x=2
+	
+	if [ $1 -eq $x -o $1 -eq 0 -o $1 -eq 1 ]
+	then	
+		echo $1	
+	fi
+	
+	while [ $x -lt $1 ]
+	do
+		fib=$[$a+$b]
+		a=$b		
+		b=$fib
+		x=$[$x+1]	
+	done
+
+	echo $fib
+}
+
+function fact
+{
+
+	
+	x=1
+
+	for i in `seq 1 $1`
+	do
+		x=$[$x * $i]
+	done
+
+	echo $x
+}
+
+if [ -z "${1//[0-9]/}" ]
+then
+
+	echo "fib of $1 = $(fib $1)"
+	echo "fact of $1 = $(fact $1)"
+else
+	echo "Enter the number!"
+fi
+
+exit 0
