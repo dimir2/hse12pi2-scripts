@@ -34,7 +34,13 @@ function main {
     echo "Такого файла не существует!"
     exit 0
   fi
-  array=( `cat $filename ` ) #--extended-regexp #| grep -E '\-?[0-9]+'
+  count=0
+  while read num
+  do
+    array[$count]=$num
+    ((count++))
+  done < <(cat $filename | grep -E '^\-?[0-9]+$')
+  #array=( `cat $filename ` ) #--extended-regexp #| grep -E '\-?[0-9]+'
   echo -e "Вы ввели массив:\n${array[@]}"
   quicksort 0 0  $((${#array[@]}-1)) #mass first last
   echo -e "После куиксорта:\n${array[@]}"

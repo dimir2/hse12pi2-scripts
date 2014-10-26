@@ -26,7 +26,13 @@ function main {
     echo "Такого файла не существует!"
     exit 0
   fi
-  atosort=( `cat $filename ` ) #--extended-regexp #| grep -E '\-?[0-9]+'
+  count=0
+  while read num
+  do
+    atosort[$count]=$num
+    ((count++))
+  done < <(cat $filename | grep -E '^\-?[0-9]+$')
+  #atosort=( `cat $filename ` ) #--extended-regexp #| grep -E '\-?[0-9]+'
   echo -e "Вы ввели массив:\n${atosort[@]}"
   bublesort 
   echo -e "После бублесорта:\n${atosort[@]}"
