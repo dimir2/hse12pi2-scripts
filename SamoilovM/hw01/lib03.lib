@@ -95,6 +95,11 @@ function sort
 		i=0
 		while read line
 		do
+			if [ -z $line ] #check for empty string
+			then
+				echo "empty string detected!"
+				exit
+			fi
 			if [ -z "${line//[0-9]/}" ] #for numbers only in array
 			then
 				arr[i]=$line
