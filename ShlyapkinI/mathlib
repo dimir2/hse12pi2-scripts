@@ -1,0 +1,77 @@
+#! /bin/bash
+
+fib()
+{
+	num=$1
+	if [ "$num" -lt 2 ]
+	then
+		echo $num
+	else 
+		let "num = num - 1"
+		let "a = $(fib $num)"
+		let "num = num -1"
+		let "b = $(fib $num)"
+		echo $((a+b))
+	fi
+	return
+}
+
+fack()
+{
+	num=$1
+	if [ "$num" -eq 0 ]
+	then
+		echo 1
+	else
+		let "num1 = num - 1"
+		let "num1 = $(fack $num1)"
+		echo $((num*num1))
+	fi
+	return
+
+}
+
+prime()
+{
+	num=$1
+	if [ "$num" -lt 2 ]
+	then
+		echo "It isn't prime"
+	else
+		for (( i=2;i*i<=$num;i++ ))
+		do	
+			if [ "$(($1%$i))" -eq 0 ]
+			then
+				echo "It isn't prime"
+				return 
+			fi
+		done
+	fi
+	echo "It is prime"
+	return 
+}
+
+check_num()
+{
+	RE='[0-9]+'
+	if [[ $1 =~ $RE ]]; then
+				return 0
+			    else
+				echo "Error: Invalid input"
+				-help
+				return 1
+			    fi
+}
+
+-help()
+{
+echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo "++++++++++++++++++++++++ Script + Action + Param ++++++++++++++++++++++++"
+echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo "-fibo  +++++ output number of Fibonacci +++++++ number have to >= 0 +++++"
+echo "-fack  +++++ output factorial +++++++++++++++++ number have to >= 0 +++++"
+echo "-prime +++++ check is number on prime +++++++++ number ++++++++++++++++++"
+echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+return
+}
+
