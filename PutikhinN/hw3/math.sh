@@ -13,7 +13,7 @@ function validatePositiveInteger() {
 }
 
 function validateNonnegativeInteger() {
-	RE='^([0-9]+|-0*)$'
+	RE='^([0-9]+|-0+)$'
 	if [[ $1 =~ $RE ]]; then
 		return 0
 	else
