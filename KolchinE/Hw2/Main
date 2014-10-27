@@ -1,0 +1,21 @@
+#!/bin/bash
+source Script2
+
+function main {
+
+echo "What are you going to count?"
+echo "1.Factorial"
+echo "2.Fibonacci"
+echo "3.Exit"
+
+read number
+case $number in 
+1) factorial {};;
+2) fibonacci {};;
+3) exit 0;;
+esac
+}
+
+main {}
+
+

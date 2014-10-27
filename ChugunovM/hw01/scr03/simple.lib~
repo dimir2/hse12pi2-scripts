@@ -1,0 +1,20 @@
+#!/bin/bash
+	
+function simple
+{
+	if (( $1 == 1 ))
+		then echo "SiMpLe"
+	else 
+		for i in `seq 2 $[$1-1]`
+		do
+			tmp=$1%$i
+			if (( $tmp == 0 ))
+				then echo "NoT SiMpLe"
+				return 1
+			fi
+		done
+ 		echo "SiMpLe"
+		return 0
+	fi
+}
+
