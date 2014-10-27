@@ -19,6 +19,8 @@ function usage ()
 	echo "# fibo         | calc fibonacci      | integer, must be possitive or zero"
 	echo "# fact         | calc factorial      | integer, must be possitive or zero"
 	echo "# pnum         | check is num prime  | integer				"
+	echo "# fibr         | calc rec fibonacci  | integer, must be possitive or zero"
+	echo "# fibs         | calc rec opt fib    | integer, must be possitive or zero"
 	echo "#-------------------------------------------------------------------------------"
 	echo "#"
 	echo "# Scripts for string ( -c ):"
@@ -27,7 +29,7 @@ function usage ()
 	echo "#--------------|---------------------|------------------------------------------"
 	echo "# ****************************There are no scripts!*****************************"
 	echo "#-------------------------------------------------------------------------------"
-	echo "#"
+	echo "#TODO: add new func in table"
 	return
 }
 
@@ -43,7 +45,7 @@ if [ $# -ne 4 ] ; then
 fi
 
 # read param
-while getopts s:n:h optname > /dev/null 2>&1; do
+while getopts s:n:c:h optname > /dev/null 2>&1; do
 	case  "$optname" in
 		s)
         		pFunc="$OPTARG"
@@ -91,6 +93,21 @@ case $pFunc in
 	pnum)
 		source hw02/pnum.sh
 		pnum $pNum 
+		exit 0
+		;;
+	fibr)
+		source hw03/fibr.sh
+		echo $(fibRec $pNum)
+		exit 0
+		;;
+	fibs)
+		source hw03/fibr.sh
+		echo $(fibRecOpt $pNum)
+		exit 0
+		;;
+	sort)
+		source hw03/sort.sh
+		echo $(sort $pNum)
 		exit 0
 		;;
 	*)

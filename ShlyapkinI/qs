@@ -1,0 +1,55 @@
+#! /bin/bash
+
+read_file()
+{
+	i=0
+	while read str; 
+		do
+	    		array[$i]="$str"
+	   		i=$(($i+1))
+		done < enter
+}
+
+qs() 
+{ 
+	let "first=$2"
+	let "last=$3"
+	let "element=$(( ($2+$3)/2 ))"
+	let "x=${array[$element]}"
+	while [[ $first -le $last ]]
+		do
+			while [[ ${array[$first]} -lt $x ]] && [[ ${#array[@]} -gt $first ]]
+				do
+					let "first=first+1"
+				done
+			while [[ ${array[$last]} -gt $x ]] && [[ 0 -le $last ]]
+				do 
+					let "last=last-1"
+				done
+			if [[ $first -le $last ]]
+				then
+					if [[ ${array[$first]} -gt ${array[$last]} ]]
+						then
+							tmp=${array[$first]}
+							array[$first]=${array[$last]}
+							array[$last]=$tmp
+					fi
+					let "first=first+1"
+					let "last=last-1"
+			fi
+		done
+		if [[ $first -lt $3 ]]
+			then
+				qs 0 $first $3
+		fi
+		if [[ $2 -lt $last ]]
+			then
+				qs 0 $2 $last
+		fi
+}
+
+read_file
+echo ${array[@]}
+qs 0 0 $((${#array[@]}-1)) 
+echo ${array[@]}
+
