@@ -1,13 +1,13 @@
 #!/bin/bash
 
-source fibofact.lib
+source ../scr02/fibofact.lib
 
 function main
 {
 	if (( $# == 1 ))
 		then if [ $1 -ge 0 ]
 			then echo "fibo_rec $1: $(fibo_rec $1)"
-			echo "factorial_iter $1: $(factorial_iter $1)"	
+		
 			return 0
 			fi
 	fi

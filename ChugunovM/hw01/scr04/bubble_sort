@@ -1,0 +1,54 @@
+#!/bin/bash
+
+function bubble_sort
+{
+	#echo ${!arr[@]}
+	echo ${arr[@]}
+
+	bubble_sort_rec ${#arr[@]}
+
+	#echo ${!arr[@]}
+	echo ${arr[@]}
+}
+
+
+function bubble_sort_rec
+{
+	if [ $1 -eq 0 ]
+		then return 0
+	fi
+
+	i=0
+
+	while [ $i -lt $[$1-1] ]; do
+		if [ ${#arr[$[$i+1]]} -ne 0 ]
+			then if [ ${arr[$[$i+1]]} -gt ${arr[$i]} ]
+				then j=${arr[$[$i+1]]}
+				arr[$[$i+1]]=${arr[$i]}
+				arr[$i]=$j
+			fi
+		fi
+		i=$[$i+1]
+	done
+	bubble_sort_rec $[$1-1]
+}
+
+function main
+{
+	declare -a arr
+
+	i=0
+
+	while read line
+	do
+		arr[i]=$line
+		i=$[i+1]
+	done < mass
+
+	bubble_sort
+
+	#echo ${!arr[@]}
+	echo ${arr[@]}	
+}
+
+main
