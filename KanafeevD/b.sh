@@ -106,8 +106,8 @@ case $pFunc in
 		exit 0
 		;;
 	sort)
-		source hw03/sort.sh
-		echo $(sort $pNum)
+		#source hw03/sort.sh
+		./hw03/sort.sh $pString
 		exit 0
 		;;
 	*)
