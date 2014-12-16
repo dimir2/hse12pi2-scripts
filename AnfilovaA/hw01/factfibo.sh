@@ -7,21 +7,17 @@ function factorial
 	res=1
 	n=1
 	while [ $1 -ge $n ]
-	do 
-           #echo "iter" $n 
+	do  
      	   res=$(($res*n))
 	   n=$(($n+1))
-	   #echo "res = " $res
 	done
-echo $res
-#return "$res"
+	echo $res
 }
 
 
 function fibonacci
 {
 	res=1
-	#fib_1=1
 	fib2=1
 	n=1
 	if [ $1 -eq 1 ] || [ $1 -eq 2 ]
@@ -39,4 +35,4 @@ echo $res
 }
 
 echo "factorial " $1 "=" `factorial $1`
-echo "fibonacci number $1 = `fibonacci $1`
+echo "fibonacci number $1 =" `fibonacci $1`

@@ -1,0 +1,66 @@
+#!/bin/bash
+y=0
+declare -a arr
+while read line
+		do	
+		if [[ $line = "0" ]]
+		then 
+			arr[y]="$line"
+			#echo "${arr[y]}"
+			let "y+=1"
+		else
+			let "line=$line+0"
+			if [[ $line != "0" ]]
+			then	
+				arr[y]="$line"
+				#echo "${arr[y]}"		
+				let "y+=1"
+			fi
+		fi	
+		done < "$1"
+echo "massive before sort:"
+echo ${arr[@]}
+function QS {
+	local i=$1
+	local j=$2
+	#echo "it is j = $j"
+	let "ever=($i+$j)/2"
+	local x=${arr[$ever]}
+	#echo "x = $x"
+	while [[ $i -le $j ]]
+	do
+		while [[ ${arr[$i]} -lt $x ]]
+		do 
+			let "i+=1"
+			#echo "i+= = $i"
+		done
+
+		while [[ ${arr[$j]} -gt $x ]]
+		do 
+			let "j-=1"
+			#echo "j+= = $j"
+		done
+
+		if [[ $i -le $j ]]
+		then
+			tmp=${arr[$i]}
+			#echo "tmp = $tmp"
+			arr[$i]=${arr[$j]}
+			arr[$j]=$tmp
+			let "i+=1" 
+			let "j-=1"
+		fi
+	done
+
+	if [[ $j -gt $1 ]]
+	then QS $1 $j
+	fi
+	
+	if [[ $i -lt $2 ]]
+	then QS $i $2
+	fi
+	#echo ${arr[@]}
+}
+QS 0 $y
+echo "massive after sort"
+echo ${arr[@]}

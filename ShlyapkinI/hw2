@@ -1,0 +1,21 @@
+#! /bin/bash
+
+source mathlib
+
+case $1 in
+	-fib) 
+	check_num $2 && fib $2
+	;;
+	-fack) 
+	check_num $2 && fack $2
+	;;
+	-prime) 
+	check_num $2 && prime $2
+	;;
+	-help) 
+	-help
+	;;
+	*) 
+	-help
+	;;
+esac
