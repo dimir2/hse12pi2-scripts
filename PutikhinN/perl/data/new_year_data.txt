@@ -1,0 +1,12 @@
+holiday Новом Году
+wishlist
+1	ничего
+5	счастья
+10	счастья и здоровья
+wishlist_end
+
+recepients
+m	Д. Тестов	1
+m	Николай	6
+f	Валентина Семеновна	3
+recepients_end

@@ -1,0 +1,2 @@
+Уважаем%gender?ый:ая% %name%,
+Желаю вам %wish% в %holiday%!

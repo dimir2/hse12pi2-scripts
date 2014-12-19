@@ -17,7 +17,7 @@ if (scalar @ARGV == 0) {
 sub prepare_db {
 	my $db_fname = "phonebook_db";
 	open (my $db_out, '>>', $db_fname)
-		or die "Eror: can't access file '$db_fname': $!";
+		or die "Error: can't access file '$db_fname': $!";
 	close $db_out;
 	return $db_fname;
 }
