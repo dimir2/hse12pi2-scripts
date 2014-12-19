@@ -1,0 +1,80 @@
+use strict;
+use warnings;
+
+
+print "if you write 'add', you can add new contact\n
+if you write 'del', you can delete a contact\n
+if you write 'show', you can see all contacts\n";
+my $a = <STDIN>;
+chomp $a;
+my $name;
+my $number;
+my $contact;
+my $flag = 0;
+if($a eq 'add'){
+	print "write name:\t";
+	$name = <STDIN>;
+	chomp $name;
+	print "write phone:\t";
+	$number = <STDIN>;
+	chomp $number;
+	$contact = "$name\t[ $number ]\n";
+	print $contact;
+	open(my $file,'>>','phoneName.txt')or die "Не могу открыть файл !\n";
+	print $file $contact;
+	close $file;
+}
+elsif($a eq 'del') {
+	open(my $fh, '<:encoding(UTF-8)', 'phoneName.txt')or die "Could not open file ";
+	my @arr = <$fh>;
+	print "write name or number, that you want delete:\t";
+	$name = <STDIN>;
+	chomp $name;
+	for(my $i=0; $i < scalar(@arr);$i++){
+		if($arr[$i]=~/$name/){
+			$flag=1;
+			splice( @arr, $i, 1);
+			print "Contant is delete successful\n"
+		}
+	}
+	if($flag==0){
+		print "Contact doesnt exist\n";
+	}
+	print "I write to file:\n@arr";
+	
+	close $fh;
+	open(my $file,'>','phoneName.txt')or die "problem with file\n";
+	foreach(@arr){
+		print $file $_;
+	}
+	close $file;
+}
+elsif($a eq 'show'){
+	open(my $fh, '<:encoding(UTF-8)', 'phoneName.txt')or die "Could not open file ";
+	my @arr = <$fh>;
+	print "one or all?\t";
+	my $t=<STDIN>;
+	chomp $t;
+	my @arr1;
+	if($t eq "one"){
+		print "what do you want?\n";
+		my $l=<STDIN>;
+		chomp $l;
+		for(my $i=0; $i < scalar(@arr);$i++){
+			if($arr[$i]=~/$l/){
+				$flag=1;
+				@arr1=splice( @arr, $i, 1);
+			}
+		}
+		if($flag==0){
+			print "Contact doesnt exist\n";
+		}
+		print "@arr1";
+	}
+	elsif($t eq "all"){
+		print "@arr";
+	}
+	else{ print "you are badboy\n";}
+	close $fh;
+}
+else{ print "you are badboy\n";}
