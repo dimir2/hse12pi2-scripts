@@ -1,0 +1,25 @@
+use strict;
+use warnings;
+
+print "write number cherez probel)))!!\n";
+my $str = <STDIN>;
+my @arr = split /\s/,$str;
+my $q=1;
+my $w=0;
+my @arr1 = @arr;
+for(my $i = 0;$i< scalar(@arr);$i++){
+	$w = $w + $arr[$i];
+}
+print "@arr\n$w\n";
+my $sum=0;;
+for(my $i=0;$i<scalar(@arr);$i++){
+	$arr1[$i]=sprintf "%.1f",$arr[$i]/$w*100;
+	$sum=$sum+$arr1[$i];
+}
+if($sum != 100){
+	my $dob = 100-$sum;
+	$arr1[scalar(@arr1)-1]=$arr1[scalar(@arr1)-1]+$dob;
+	$sum+=$dob;
+}
+print "@arr1\n";
+print "$sum\n";
