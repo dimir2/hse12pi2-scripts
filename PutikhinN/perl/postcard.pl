@@ -29,7 +29,7 @@ unless (GetOptions(
 }
 
 unless (defined $data_fname) {
-	print_error_and_exit("data file is not defined");
+	print_error_with_usage_and_exit("data file is not defined");
 }
 unless (defined $template_fname) {
 	print_error_with_usage_and_exit("template file is not defined");
