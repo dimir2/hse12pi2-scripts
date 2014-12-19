@@ -236,12 +236,6 @@ sub generate_postcards_to_files {
 			for my $wish_i (1 .. $#wishlist) {
 				my $cur_rel = $wishlist[$wish_i]->[0];
 				my $prev_rel = $wishlist[$wish_i-1]->[0];
-				if (($cur_rel == $rel_level)
-					|| ($wish_i == $#wishlist)
-				) {
-					$wish = $wishlist[$wish_i]->[1];
-					last;
-				}
 				if(($cur_rel > $rel_level) && ($prev_rel < $rel_level)) {
 					if ($rel_inc) {
 						$wish = $wishlist[$wish_i]->[1];
@@ -249,7 +243,13 @@ sub generate_postcards_to_files {
 						$wish = $wishlist[$wish_i-1]->[1];
 					}
 					last;
+				} elsif (($cur_rel == $rel_level)
+					|| ($wish_i == $#wishlist)
+				) {
+					$wish = $wishlist[$wish_i]->[1];
+					last;
 				}
+				
 			}
 		}
 		say_verbose("Generating postcard for $name with wish \"$wish\"");
