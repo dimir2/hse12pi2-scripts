@@ -1,11 +1,11 @@
 #!/usr/bin/perl
-
 sub fibonacci {
 my $n = shift; 
 $n < 3 ? 1: fibonacci($n - 1) + fibonacci($n - 2)
 }
 
-sub factorial {
+sub factorial 
+{
 my $m = shift;
 if ($m==0)
 { return 1;

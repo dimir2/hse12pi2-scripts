@@ -11,6 +11,7 @@ if ($name eq $temp2 or $phone eq $temp2) {
 print "surname: $name Phone: $phone \n";
 }
 }
+
 close PHONE; 
 };
 if ($temp1==2) {

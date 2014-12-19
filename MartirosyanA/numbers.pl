@@ -5,6 +5,8 @@ use Data::Dumper qw(Dumper);
 use POSIX;
 
 my $summa = 0;
+
+
 for ($i = 0; $i <= $#ARGV; $i++)
 {
    $summa += $ARGV[$i];
