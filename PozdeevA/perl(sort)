@@ -1,0 +1,80 @@
+use strict;
+use warnings;
+use Data::Dumper qw(Dumper);
+
+my @mainArr;
+for(my $i = 0; $i<=10; $i++)
+{
+	$mainArr[$i]=int(rand(100))+0;
+}
+print"before Merge sort:\n@mainArr\n";
+my @work;
+#=========================================================================================#
+sub mergeSort
+{
+	my($array,$first,$last) = @_;
+	if($last>$first)
+	{
+		my $middle = int(($last+$first)/2);
+		mergeSort($array,$first,$middle);
+		mergeSort($array,$middle+1,$last);
+		my $j = 0;
+		$work[$j++] = $$array[$_]for($first..$last);
+		$middle = int(($first+$last)/2)if($middle>$last);
+		my $n = $middle-$first+1;
+		for(my $i=$first,$j=0,my $k=$n;$i<=$last;$i++)
+		{
+	    		if(($j<$n)&&(($k==(($last-$first)+1))||($work[$j]lt$work[$k])))
+			{
+				$$array[$i]=$work[$j++]
+	    		}
+			else
+			{
+				$$array[$i]=$work[$k++];
+	    		}
+		}
+    	}
+}
+mergeSort(\@mainArr,0,$#mainArr);
+print "after Merge sort:\n@mainArr\n";
+print "=============================================================\n";
+#=========================================================================================#
+
+for(my $i = 0; $i<=10; $i++)
+{
+	$mainArr[$i]=int(rand(100))+0;
+}
+print"before heap sort:\n@mainArr\n";
+sub HeapSort{
+	my($mainArr) = @_;
+	my $sh =0 ;
+	my $n = @mainArr+0;
+	if($n>1){
+	while($sh+2!=$n){
+		$b=undef;
+		for my$i(0..$n-1){
+			if($i*2+2+$sh<$n){
+				if($mainArr[$i+$sh]gt$mainArr[$i*2+1+$sh] || $mainArr[$i+$sh]gt$mainArr[$i*2+2+$sh]){
+					if($mainArr[$i*2+1+$sh]lt$mainArr[$i*2+2+$sh]){
+						($mainArr[$i*2+1+$sh],$mainArr[$i+$sh])=($mainArr[$i+$sh],$mainArr[$i*2+1+$sh]);
+						$b=1;
+					}elsif($mainArr[$i*2+2+$sh]lt$mainArr[$i*2+1+$sh]){
+						($mainArr[$i*2+2+$sh],$mainArr[$i+$sh])=($mainArr[$i+$sh],$mainArr[$i*2+2+$sh]);
+						$b=1;
+					}
+					}elsif($mainArr[$i*2+2+$sh]lt$mainArr[$i*2+1+$sh]){
+						($mainArr[$i*2+1+$sh],$mainArr[$i*2+2+$sh])=($mainArr[$i*2+2+$sh],$mainArr[$i*2+1+$sh]);
+						$b=1;
+					}
+					}elsif($i*2+1+$sh<$n && $mainArr[$i+$sh]gt$mainArr[$i*2+1+$sh]){
+						($mainArr[$i+$sh],$mainArr[$i*2+1+$sh])=($mainArr[$i*2+1+$sh],$mainArr[$i+$sh]);
+						$b=1;
+					}
+				}
+				++$sh if!$b;
+				last if$sh+2==$n;
+			}
+		}
+	}
+HeapSort(\@mainArr);
+print "after heap sort:\n@mainArr\n";
