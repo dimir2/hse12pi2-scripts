@@ -1,0 +1,51 @@
+use strict;
+use warnings;
+
+my $mas = [
+   [1980, 'Ivanov', 'Ivan', 'Ivanovich'],
+   [1980, 'Ivanov', 'Sergey', 'Petrovich'],
+   [1980, 'Sidorov', 'Semen', 'Semenovich'],
+   [1985, 'Sidorov', 'Den', 'Denisovich'],
+   [1985, 'Konsantinopol\'skii', 'Konstantin','Konstantinovich'], 
+   ];
+my $i=0;
+my $j=0;
+my $flag=0;
+my $flag1=0;
+my $flag2=0;
+foreach my $elem (@{$mas}){
+	foreach my $elem2 (@{$mas->[$i]}){
+		if($flag > 1){
+			print "$elem2 \t\t";
+			$j++;
+		}
+		else{
+			if($flag1 == 1){
+				if($elem2 ne @{$mas->[$i-1]}[1]){
+				print "$elem2 \t";
+				$flag1 = 0;
+				}
+				else { print "\t\t";
+				$flag1 = 0;
+				}
+
+			}
+			if($flag ==0){
+				if($elem2 ne @{$mas->[$i-1]}[0]){
+					print "$elem2 \t";
+					$flag++;
+				}
+				else { print "\t";
+					$flag1 = 1;
+				}
+			}
+			
+		}
+		
+		$flag++;
+	}
+	print "\n";
+	$i++;
+	$j=0;
+	$flag=0;
+}
