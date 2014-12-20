@@ -1,0 +1,26 @@
+use strict;
+use warnings;
+use Data::Dumper qw(Dumper);
+
+my %what_when = (
+    13 => 'Lunch',
+    17 => 'Tea',
+    20 => 'Dinner',
+     9 => 'Breakfast',
+);
+for my $key (sort { $a <=> $b } keys %what_when){
+  print "$key = $what_when{$key}\n";
+}
+my @mas;
+my $i=0;
+my $j=0;
+my @keys = keys %what_when;
+print Dumper(\@keys);
+my @value = values %what_when;
+print Dumper(\@value);
+for my $key (@keys){
+    $mas[$i][$j]=$keys[$i];
+    $mas[$i][$j+1]=$value[$i];
+    $i++;
+}
+print Dumper(\@mas);
