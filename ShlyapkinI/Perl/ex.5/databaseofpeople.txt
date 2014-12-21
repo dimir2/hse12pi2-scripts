@@ -1,0 +1,7 @@
+male Ivan Shlyapkin 8
+female Polina Dudnova 10
+male Iliya Erohin 7
+male Mihail Samoilov 6
+female Nasty Svitova 3
+female Olga Suglobova 2
+male Nikolay Shlyapkin 1
