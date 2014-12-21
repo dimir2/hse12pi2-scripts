@@ -10,30 +10,14 @@ my %what_when = (
 	20 => 'Dinner',
 	9 => 'Breakfast',
 );
-my $when;
-my @schedule;
-my @non;
-foreach $when (keys %what_when)
+print "@{[%what_when]}\n";
+my @result;
+map { push @result,[$_, $what_when{$_}]} sort {$a <=> $b} keys %what_when;
+for(my $j=0; $j< scalar @result; $j++)
 {
-	push (@non, $when);
-}
-my @yes = sort {$a <=> $b }
-@non;
-for(my $j=0; $j<=3; $j++)
-{
-	my @row = ($what_when{$yes[$j]}, $yes[$j]);
-#	say $yes[$j];
-	push (@schedule, [@row]);
-}
-say "Massiv = (";
-for(my $j=0; $j<=3; $j++)
-{
-	print " 	[";
 	for(my $k=0; $k<=1; $k++)
 	{
-		print "$schedule[$j][$k] ";
+		print "$result[$j][$k] ";
 	}
-	say "],";
+	say"";
 }
-say ");"
-
