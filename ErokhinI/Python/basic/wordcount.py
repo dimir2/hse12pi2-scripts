@@ -43,8 +43,9 @@ def print_words(filename):
   try:
     f = open(filename)
   except IOError:
-      print ("No file")
+    print ("No file")
 
+  f = open(filename)
   fd = f.read()
   arr = fd.split()   
   arr.sort()
